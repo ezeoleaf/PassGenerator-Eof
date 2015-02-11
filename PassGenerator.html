@@ -8,6 +8,10 @@
 </head>
 <script>
 
+cantOfNumbers = 0;
+cantOfUpper = 0;
+cantOfLower = 0;
+cantOfSymbol = 0;
 maxLong = 0;
 var vDigitsPass = [];
 
@@ -35,240 +39,319 @@ function getValue(binaryCode)
 	{
 		case '00100001':
 			digitToReturn = "!";
+			cantOfSymbol = 1;
 			break;
 		case '00100011':
 			digitToReturn = "#";
+			cantOfSymbol = 1;
 			break;
 		case '00100100':
 			digitToReturn = "$";
+			cantOfSymbol = 1;
 			break;
 		case '00100101':
 			digitToReturn = "%";
+			cantOfSymbol = 1;
 			break;
 		case '00100110':
 			digitToReturn = "&";
+			cantOfSymbol = 1;
 			break;
 		case '00101010':
 			digitToReturn = "*";
+			cantOfSymbol = 1;
 			break;
 		case '00101011':
 			digitToReturn = "+";
+			cantOfSymbol = 1;
 			break;
 		case '00101101':
 			digitToReturn = "-";
+			cantOfSymbol = 1;
 			break;
 		case '00101110':
 			digitToReturn = ".";
+			cantOfSymbol = 1;
 			break;
 		case '00101111':
 			digitToReturn = "/";
+			cantOfSymbol = 1;
 			break;
 		case '00110000':
 			digitToReturn = "0";
+			cantOfNumbers = 1;
 			break;
 		case '00110001':
 			digitToReturn = "1";
+			cantOfNumbers = 1;
 			break;
 		case '00110010':
 			digitToReturn = "2";
+			cantOfNumbers = 1;
 			break;
 		case '00110011':
 			digitToReturn = "3";
+			cantOfNumbers = 1;
 			break;
 		case '00110100':
 			digitToReturn = "4";
+			cantOfNumbers = 1;
 			break;
 		case '00110101':
 			digitToReturn = "5";
+			cantOfNumbers = 1;
 			break;
 		case '00110110':
 			digitToReturn = "6";
+			cantOfNumbers = 1;
 			break;
 		case '00110111':
 			digitToReturn = "7";
+			cantOfNumbers = 1;
 			break;
 		case '00111000':
 			digitToReturn = "8";
+			cantOfNumbers = 1;
 			break;
 		case '00111001':
 			digitToReturn = "9";
+			cantOfNumbers = 1;
 			break;
 		case '00111010':
 			digitToReturn = ":";
+			cantOfSymbol = 1;
 			break;
 		case '00111011':
 			digitToReturn = ";";
+			cantOfSymbol = 1;
 			break;
 		case '00111101':
 			digitToReturn = "=";
+			cantOfSymbol = 1;
 			break;
 		case '00111111':
 			digitToReturn = "?";
+			cantOfSymbol = 1;
 			break;
 		case '01000000':
 			digitToReturn = "@";
+			cantOfSymbol = 1;
 			break;
 		case '01000001':
 			digitToReturn = "A";
+			cantOfUpper = 1;
 			break;
 		case '01000010':
 			digitToReturn = "B";
+			cantOfUpper = 1;
 			break;
 		case '01000011':
 			digitToReturn = "C";
+			cantOfUpper = 1;
 			break;
 		case '01000100':
 			digitToReturn = "D";
+			cantOfUpper = 1;
 			break;
 		case '01000101':
 			digitToReturn = "E";
+			cantOfUpper = 1;
 			break;
 		case '01000110':
 			digitToReturn = "F";
+			cantOfUpper = 1;
 			break;
 		case '01000111':
 			digitToReturn = "G";
+			cantOfUpper = 1;
 			break;
 		case '01001000':
 			digitToReturn = "H";
+			cantOfUpper = 1;
 			break;
 		case '01001001':
 			digitToReturn = "I";
+			cantOfUpper = 1;
 			break;
 		case '01001010':
 			digitToReturn = "J";
+			cantOfUpper = 1;
 			break;
 		case '01001011':
 			digitToReturn = "K";
+			cantOfUpper = 1;
 			break;
 		case '01001100':
 			digitToReturn = "L";
+			cantOfUpper = 1;
 			break;
 		case '01001101':
 			digitToReturn = "M";
+			cantOfUpper = 1;
 			break;
 		case '01001110':
 			digitToReturn = "N";
+			cantOfUpper = 1;
 			break;
 		case '01001111':
 			digitToReturn = "O";
+			cantOfUpper = 1;
 			break;
 		case '01010000':
 			digitToReturn = "P";
+			cantOfUpper = 1;
 			break;
 		case '01010001':
 			digitToReturn = "Q";
+			cantOfUpper = 1;
 			break;
 		case '01010010':
 			digitToReturn = "R";
+			cantOfUpper = 1;
 			break;
 		case '01010011':
 			digitToReturn = "S";
+			cantOfUpper = 1;
 			break;
 		case '01010100':
 			digitToReturn = "T";
+			cantOfUpper = 1;
 			break;
 		case '01010101':
 			digitToReturn = "U";
+			cantOfUpper = 1;
 			break;
 		case '01010110':
 			digitToReturn = "V";
+			cantOfUpper = 1;
 			break;
 		case '01010111':
 			digitToReturn = "W";
+			cantOfUpper = 1;
 			break;
 		case '01011000':
 			digitToReturn = "X";
+			cantOfUpper = 1;
 			break;
 		case '01011001':
 			digitToReturn = "Y";
+			cantOfUpper = 1;
 			break;
 		case '01011010':
 			digitToReturn = "Z";
+			cantOfUpper = 1;
 			break;
 		case '01011011':
 			digitToReturn = "[";
+			cantOfSymbol = 1;
 			break;
 		case '01011101':
 			digitToReturn = "]";
+			cantOfSymbol = 1;
 			break;
 		case '01100001':
 			digitToReturn = "a";
+			cantOfLower = 1;
 			break;
 		case '01100010':
 			digitToReturn = "b";
+			cantOfLower = 1;
 			break;
 		case '01100011':
 			digitToReturn = "c";
+			cantOfLower = 1;
 			break;
 		case '01100100':
 			digitToReturn = "d";
+			cantOfLower = 1;
 			break;
 		case '01100101':
 			digitToReturn = "e";
+			cantOfLower = 1;
 			break;
 		case '01100110':
 			digitToReturn = "f";
+			cantOfLower = 1;
 			break;
 		case '01100111':
 			digitToReturn = "g";
+			cantOfLower = 1;
 			break;
 		case '01101000':
 			digitToReturn = "h";
+			cantOfLower = 1;
 			break;
 		case '01101001':
 			digitToReturn = "i";
+			cantOfLower = 1;
 			break;
 		case '01101010':
 			digitToReturn = "j";
+			cantOfLower = 1;
 			break;
 		case '01101011':
 			digitToReturn = "k";
+			cantOfLower = 1;
 			break;
 		case '01101100':
 			digitToReturn = "l";
+			cantOfLower = 1;
 			break;
 		case '01101101':
 			digitToReturn = "m";
+			cantOfLower = 1;
 			break;
 		case '01101110':
 			digitToReturn = "n";
+			cantOfLower = 1;
 			break;
 		case '01101111':
 			digitToReturn = "o";
+			cantOfLower = 1;
 			break;
 		case '01110000':
 			digitToReturn = "p";
+			cantOfLower = 1;
 			break;
 		case '01110001':
 			digitToReturn = "q";
+			cantOfLower = 1;
 			break;
 		case '01110010':
 			digitToReturn = "r";
+			cantOfLower = 1;
 			break;
 		case '01110011':
 			digitToReturn = "s";
+			cantOfLower = 1;
 			break;
 		case '01110100':
 			digitToReturn = "t";
+			cantOfLower = 1;
 			break;
 		case '01110101':
 			digitToReturn = "u";
+			cantOfLower = 1;
 			break;
 		case '01110110':
 			digitToReturn = "v";
+			cantOfLower = 1;
 			break;
 		case '01110111':
 			digitToReturn = "w";
+			cantOfLower = 1;
 			break;
 		case '01111000':
 			digitToReturn = "x";
+			cantOfLower = 1;
 			break;
 		case '01111001':
 			digitToReturn = "y";
+			cantOfLower = 1;
 			break;
 		case '01111010':
 			digitToReturn = "z";
+			cantOfLower = 1;
 			break;
 		default:
 			getValue(newDigits());
@@ -279,6 +362,10 @@ function getValue(binaryCode)
 
 function getPass(longPass)
 {
+	cantOfLower = 0;
+	cantOfNumbers = 0;
+	cantOfSymbol = 0;
+	cantOfUpper = 0;
 	countOfDigits = 0;
 	digitsToAdd = "";
 	finalPass = "";
@@ -307,14 +394,22 @@ function getPass(longPass)
 	{
 		finalPass += getValue(vDigitsPass[i]);
 	}
-	$('#resultContainer').html(finalPass);
+	
+	if(cantOfLower == 1 && cantOfNumbers == 1 && cantOfSymbol == 1 && cantOfUpper == 1)
+	{
+		$('#resultContainer').html(finalPass);
+	}
+	else
+	{
+		getPass(longPass);
+	}
 }
 
 $(document).ready(function (){
 	
 	$('#btnGenerate').click(function (){
 		var longValue = $('#longPassValue').val();
-		if(longValue == 0 || longValue == "" || longValue < 6 || longValue > 30)
+		if(longValue == 0 || longValue == "" || longValue < 6 || longValue > 60)
 		{
 			$('#longPassValue').focus();
 		}
@@ -327,12 +422,20 @@ $(document).ready(function (){
 });
 </script>
 <body>
+	<div id="title">
+	<span>Generador de contrase&ntilde;as - Longitud entre 6 y 60</span>
+	</div>
+	</br>
 	<div id="dataContainer">
-		<span>Ingrese la longitud: &nbsp;</span>
-		<input type="number" id="longPassValue" name="longPass" size="4" min="6" max="30" style="text-align: right;"/>
+		<span>Ingrese la longitud:</span>
+		<input type="number" id="longPassValue" name="longPass" size="4" value="6" min="6" max="60" style="text-align: right;"/>
 		<input type="button" id="btnGenerate" name="btnGenerate" value="Generar" />
 	</div>
-	<div id="resultContainer">
+	</br>
+	<div id="result">
+	<span>Resultado:</span>
+	<span id="resultContainer">
+	</span>
 	</div>
 </body> 
 </html>
