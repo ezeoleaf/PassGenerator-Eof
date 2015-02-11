@@ -185,6 +185,12 @@ function setDictionary()
 		"01111001": "y",
 		"01111010": "z",
 	}
+
+	//Agregarle los simbolos al dictionary full
+	//Separar los diccionarios por letras, numeros y simbolos y concatenar
+	
+	//dictionaryFull = dictionaryNAL;
+	//dictionaryFull.add();
 }
 
 function getValue(binaryCode)
@@ -521,6 +527,7 @@ function getValue(binaryCode)
 			getValue(newDigits());
 			break;
 	}*/
+	
 	var dictionary;
 	if(check == 1)
 	{
@@ -575,14 +582,14 @@ function getPass(longPass)
 		finalPass += getValue(vDigitsPass[i]);
 	}
 	
-	//if(cantOfLower == 1 && cantOfNumbers == 1 && cantOfSymbol == 1 && cantOfUpper == 1)
-	//{
+	if(cantOfLower == 1 && cantOfNumbers == 1 && cantOfSymbol == 1 && cantOfUpper == 1)
+	{
 		$('#resultContainer').html(finalPass);
-	//}
-	//else
-	//{
-		//getPass(longPass);
-	//}
+	}
+	else
+	{
+		getPass(longPass);
+	}
 }
 
 $(document).ready(function (){
