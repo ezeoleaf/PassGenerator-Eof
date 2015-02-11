@@ -1,0 +1,338 @@
+<!DOCTYPE html> 
+<html lang="es"> 
+<head> 
+	<title>Pass Generator</title>
+	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script src="jquery.timer.js" type="text/javascript"></script>
+	<!--link href="PassGeneratorStyle.css" rel="stylesheet" type="text/css" /-->
+</head>
+<script>
+
+maxLong = 0;
+var vDigitsPass = [];
+
+function newDigits()
+{
+	newDigit = "";
+	for(var i = 1; i <= 8; i++)
+	{
+		if(i == 1)
+		{
+			newDigit += "0";
+		}
+		else
+		{
+			newDigit += Math.floor(Math.random() * 2);
+		}
+	}
+	return newDigit;
+}
+
+function getValue(binaryCode)
+{
+	digitToReturn = "";
+	switch(binaryCode)
+	{
+		case '00100001':
+			digitToReturn = "!";
+			break;
+		case '00100011':
+			digitToReturn = "#";
+			break;
+		case '00100100':
+			digitToReturn = "$";
+			break;
+		case '00100101':
+			digitToReturn = "%";
+			break;
+		case '00100110':
+			digitToReturn = "&";
+			break;
+		case '00101010':
+			digitToReturn = "*";
+			break;
+		case '00101011':
+			digitToReturn = "+";
+			break;
+		case '00101101':
+			digitToReturn = "-";
+			break;
+		case '00101110':
+			digitToReturn = ".";
+			break;
+		case '00101111':
+			digitToReturn = "/";
+			break;
+		case '00110000':
+			digitToReturn = "0";
+			break;
+		case '00110001':
+			digitToReturn = "1";
+			break;
+		case '00110010':
+			digitToReturn = "2";
+			break;
+		case '00110011':
+			digitToReturn = "3";
+			break;
+		case '00110100':
+			digitToReturn = "4";
+			break;
+		case '00110101':
+			digitToReturn = "5";
+			break;
+		case '00110110':
+			digitToReturn = "6";
+			break;
+		case '00110111':
+			digitToReturn = "7";
+			break;
+		case '00111000':
+			digitToReturn = "8";
+			break;
+		case '00111001':
+			digitToReturn = "9";
+			break;
+		case '00111010':
+			digitToReturn = ":";
+			break;
+		case '00111011':
+			digitToReturn = ";";
+			break;
+		case '00111101':
+			digitToReturn = "=";
+			break;
+		case '00111111':
+			digitToReturn = "?";
+			break;
+		case '01000000':
+			digitToReturn = "@";
+			break;
+		case '01000001':
+			digitToReturn = "A";
+			break;
+		case '01000010':
+			digitToReturn = "B";
+			break;
+		case '01000011':
+			digitToReturn = "C";
+			break;
+		case '01000100':
+			digitToReturn = "D";
+			break;
+		case '01000101':
+			digitToReturn = "E";
+			break;
+		case '01000110':
+			digitToReturn = "F";
+			break;
+		case '01000111':
+			digitToReturn = "G";
+			break;
+		case '01001000':
+			digitToReturn = "H";
+			break;
+		case '01001001':
+			digitToReturn = "I";
+			break;
+		case '01001010':
+			digitToReturn = "J";
+			break;
+		case '01001011':
+			digitToReturn = "K";
+			break;
+		case '01001100':
+			digitToReturn = "L";
+			break;
+		case '01001101':
+			digitToReturn = "M";
+			break;
+		case '01001110':
+			digitToReturn = "N";
+			break;
+		case '01001111':
+			digitToReturn = "O";
+			break;
+		case '01010000':
+			digitToReturn = "P";
+			break;
+		case '01010001':
+			digitToReturn = "Q";
+			break;
+		case '01010010':
+			digitToReturn = "R";
+			break;
+		case '01010011':
+			digitToReturn = "S";
+			break;
+		case '01010100':
+			digitToReturn = "T";
+			break;
+		case '01010101':
+			digitToReturn = "U";
+			break;
+		case '01010110':
+			digitToReturn = "V";
+			break;
+		case '01010111':
+			digitToReturn = "W";
+			break;
+		case '01011000':
+			digitToReturn = "X";
+			break;
+		case '01011001':
+			digitToReturn = "Y";
+			break;
+		case '01011010':
+			digitToReturn = "Z";
+			break;
+		case '01011011':
+			digitToReturn = "[";
+			break;
+		case '01011101':
+			digitToReturn = "]";
+			break;
+		case '01100001':
+			digitToReturn = "a";
+			break;
+		case '01100010':
+			digitToReturn = "b";
+			break;
+		case '01100011':
+			digitToReturn = "c";
+			break;
+		case '01100100':
+			digitToReturn = "d";
+			break;
+		case '01100101':
+			digitToReturn = "e";
+			break;
+		case '01100110':
+			digitToReturn = "f";
+			break;
+		case '01100111':
+			digitToReturn = "g";
+			break;
+		case '01101000':
+			digitToReturn = "h";
+			break;
+		case '01101001':
+			digitToReturn = "i";
+			break;
+		case '01101010':
+			digitToReturn = "j";
+			break;
+		case '01101011':
+			digitToReturn = "k";
+			break;
+		case '01101100':
+			digitToReturn = "l";
+			break;
+		case '01101101':
+			digitToReturn = "m";
+			break;
+		case '01101110':
+			digitToReturn = "n";
+			break;
+		case '01101111':
+			digitToReturn = "o";
+			break;
+		case '01110000':
+			digitToReturn = "p";
+			break;
+		case '01110001':
+			digitToReturn = "q";
+			break;
+		case '01110010':
+			digitToReturn = "r";
+			break;
+		case '01110011':
+			digitToReturn = "s";
+			break;
+		case '01110100':
+			digitToReturn = "t";
+			break;
+		case '01110101':
+			digitToReturn = "u";
+			break;
+		case '01110110':
+			digitToReturn = "v";
+			break;
+		case '01110111':
+			digitToReturn = "w";
+			break;
+		case '01111000':
+			digitToReturn = "x";
+			break;
+		case '01111001':
+			digitToReturn = "y";
+			break;
+		case '01111010':
+			digitToReturn = "z";
+			break;
+		default:
+			getValue(newDigits());
+			break;
+	}
+	return digitToReturn;
+}
+
+function getPass(longPass)
+{
+	countOfDigits = 0;
+	digitsToAdd = "";
+	finalPass = "";
+	vDigitsPass.length = 0;
+	cantOfDigitsPass = longPass * 8;
+	for(var i = 1; i <= cantOfDigitsPass; i++)
+	{
+		countOfDigits++;
+		if(countOfDigits == 1)
+		{
+			digit = 0;
+		}
+		else
+		{
+			digit = Math.floor(Math.random() * 2);
+		}
+		digitsToAdd += digit;
+		if(countOfDigits == 8)
+		{
+			vDigitsPass.push(digitsToAdd);
+			countOfDigits = 0;
+			digitsToAdd = "";
+		}
+	}
+	for(var i = 0; i < vDigitsPass.length; i++)
+	{
+		finalPass += getValue(vDigitsPass[i]);
+	}
+	$('#resultContainer').html(finalPass);
+}
+
+$(document).ready(function (){
+	
+	$('#btnGenerate').click(function (){
+		var longValue = $('#longPassValue').val();
+		if(longValue == 0 || longValue == "" || longValue < 6 || longValue > 30)
+		{
+			$('#longPassValue').focus();
+		}
+		else
+		{
+			getPass(longValue);
+		}
+	});
+	
+});
+</script>
+<body>
+	<div id="dataContainer">
+		<span>Ingrese la longitud: &nbsp;</span>
+		<input type="number" id="longPassValue" name="longPass" size="4" min="6" max="30" style="text-align: right;"/>
+		<input type="button" id="btnGenerate" name="btnGenerate" value="Generar" />
+	</div>
+	<div id="resultContainer">
+	</div>
+</body> 
+</html>
