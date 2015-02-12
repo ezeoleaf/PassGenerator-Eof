@@ -17,6 +17,7 @@ var dictionaryFull;
 var dictionaryNAL;
 var vDigitsPass = [];
 var check;
+var dictionary = {};
 
 function newDigits()
 {
@@ -37,7 +38,21 @@ function newDigits()
 
 function setDictionary()
 {
-	dictionaryFull = {
+
+	numberDictionary = {
+		"00110000": "0",
+		"00110001": "1",
+		"00110010": "2",
+		"00110011": "3",
+		"00110100": "4",
+		"00110101": "5",
+		"00110110": "6",
+		"00110111": "7",
+		"00111000": "8",
+		"00111001": "9",
+	}
+
+	symbolDictionary = {
 		"00100001": "!",
 		"00100011": "#",
 		"00100100": "$",
@@ -48,90 +63,18 @@ function setDictionary()
 		"00101101": "-",
 		"00101110": ".",
 		"00101111": "/",
-		"00110000": "0",
-		"00110001": "1",
-		"00110010": "2",
-		"00110011": "3",
-		"00110100": "4",
-		"00110101": "5",
-		"00110110": "6",
-		"00110111": "7",
-		"00111000": "8",
-		"00111001": "9",
 		"00111010": ":",
 		"00111011": ";",
 		"00111101": "=",
 		"00111111": "?",
 		"01000000": "@",
-		"01000001": "A",
-		"01000010": "B",
-		"01000011": "C",
-		"01000100": "D",
-		"01000101": "E",
-		"01000110": "F",
-		"01000111": "G",
-		"01001000": "H",
-		"01001001": "I",
-		"01001010": "J",
-		"01001011": "K",
-		"01001100": "L",
-		"01001101": "M",
-		"01001110": "N",
-		"01001111": "O",
-		"01010000": "P",
-		"01010001": "Q",
-		"01010010": "R",
-		"01010011": "S",
-		"01010100": "T",
-		"01010101": "U",
-		"01010110": "V",
-		"01010111": "W",
-		"01011000": "X",
-		"01011001": "Y",
-		"01011010": "Z",
 		"01011011": "[",
 		"01011101": "]",
 		"01011111": "_",
 		"01111110": "~",
-		"01100001": "a",
-		"01100010": "b",
-		"01100011": "c",
-		"01100100": "d",
-		"01100101": "e",
-		"01100110": "f",
-		"01100111": "g",
-		"01101000": "h",
-		"01101001": "i",
-		"01101010": "j",
-		"01101011": "k",
-		"01101100": "l",
-		"01101101": "m",
-		"01101110": "n",
-		"01101111": "o",
-		"01110000": "p",
-		"01110001": "q",
-		"01110010": "r",
-		"01110011": "s",
-		"01110100": "t",
-		"01110101": "u",
-		"01110110": "v",
-		"01110111": "w",
-		"01111000": "x",
-		"01111001": "y",
-		"01111010": "z",
 	}
 	
-	dictionaryNAL = {
-		"00110000": "0",
-		"00110001": "1",
-		"00110010": "2",
-		"00110011": "3",
-		"00110100": "4",
-		"00110101": "5",
-		"00110110": "6",
-		"00110111": "7",
-		"00111000": "8",
-		"00111001": "9",
+	letterUDictionary = {
 		"01000001": "A",
 		"01000010": "B",
 		"01000011": "C",
@@ -158,6 +101,9 @@ function setDictionary()
 		"01011000": "X",
 		"01011001": "Y",
 		"01011010": "Z",
+	}
+	
+	letterLDictionary =	{
 		"01100001": "a",
 		"01100010": "b",
 		"01100011": "c",
@@ -185,367 +131,51 @@ function setDictionary()
 		"01111001": "y",
 		"01111010": "z",
 	}
-
-	//Agregarle los simbolos al dictionary full
-	//Separar los diccionarios por letras, numeros y simbolos y concatenar
-	
-	//dictionaryFull = dictionaryNAL;
-	//dictionaryFull.add();
 }
 
 function getValue(binaryCode)
 {
 	digitToReturn = "";
-	/*
-	switch(binaryCode)
-	{
-		case '00100001':
-			digitToReturn = "!";
-			cantOfSymbol = 1;
-			break;
-		case '00100011':
-			digitToReturn = "#";
-			cantOfSymbol = 1;
-			break;
-		case '00100100':
-			digitToReturn = "$";
-			cantOfSymbol = 1;
-			break;
-		case '00100101':
-			digitToReturn = "%";
-			cantOfSymbol = 1;
-			break;
-		case '00100110':
-			digitToReturn = "&";
-			cantOfSymbol = 1;
-			break;
-		case '00101010':
-			digitToReturn = "*";
-			cantOfSymbol = 1;
-			break;
-		case '00101011':
-			digitToReturn = "+";
-			cantOfSymbol = 1;
-			break;
-		case '00101101':
-			digitToReturn = "-";
-			cantOfSymbol = 1;
-			break;
-		case '00101110':
-			digitToReturn = ".";
-			cantOfSymbol = 1;
-			break;
-		case '00101111':
-			digitToReturn = "/";
-			cantOfSymbol = 1;
-			break;
-		case '00110000':
-			digitToReturn = "0";
-			cantOfNumbers = 1;
-			break;
-		case '00110001':
-			digitToReturn = "1";
-			cantOfNumbers = 1;
-			break;
-		case '00110010':
-			digitToReturn = "2";
-			cantOfNumbers = 1;
-			break;
-		case '00110011':
-			digitToReturn = "3";
-			cantOfNumbers = 1;
-			break;
-		case '00110100':
-			digitToReturn = "4";
-			cantOfNumbers = 1;
-			break;
-		case '00110101':
-			digitToReturn = "5";
-			cantOfNumbers = 1;
-			break;
-		case '00110110':
-			digitToReturn = "6";
-			cantOfNumbers = 1;
-			break;
-		case '00110111':
-			digitToReturn = "7";
-			cantOfNumbers = 1;
-			break;
-		case '00111000':
-			digitToReturn = "8";
-			cantOfNumbers = 1;
-			break;
-		case '00111001':
-			digitToReturn = "9";
-			cantOfNumbers = 1;
-			break;
-		case '00111010':
-			digitToReturn = ":";
-			cantOfSymbol = 1;
-			break;
-		case '00111011':
-			digitToReturn = ";";
-			cantOfSymbol = 1;
-			break;
-		case '00111101':
-			digitToReturn = "=";
-			cantOfSymbol = 1;
-			break;
-		case '00111111':
-			digitToReturn = "?";
-			cantOfSymbol = 1;
-			break;
-		case '01000000':
-			digitToReturn = "@";
-			cantOfSymbol = 1;
-			break;
-		case '01000001':
-			digitToReturn = "A";
-			cantOfUpper = 1;
-			break;
-		case '01000010':
-			digitToReturn = "B";
-			cantOfUpper = 1;
-			break;
-		case '01000011':
-			digitToReturn = "C";
-			cantOfUpper = 1;
-			break;
-		case '01000100':
-			digitToReturn = "D";
-			cantOfUpper = 1;
-			break;
-		case '01000101':
-			digitToReturn = "E";
-			cantOfUpper = 1;
-			break;
-		case '01000110':
-			digitToReturn = "F";
-			cantOfUpper = 1;
-			break;
-		case '01000111':
-			digitToReturn = "G";
-			cantOfUpper = 1;
-			break;
-		case '01001000':
-			digitToReturn = "H";
-			cantOfUpper = 1;
-			break;
-		case '01001001':
-			digitToReturn = "I";
-			cantOfUpper = 1;
-			break;
-		case '01001010':
-			digitToReturn = "J";
-			cantOfUpper = 1;
-			break;
-		case '01001011':
-			digitToReturn = "K";
-			cantOfUpper = 1;
-			break;
-		case '01001100':
-			digitToReturn = "L";
-			cantOfUpper = 1;
-			break;
-		case '01001101':
-			digitToReturn = "M";
-			cantOfUpper = 1;
-			break;
-		case '01001110':
-			digitToReturn = "N";
-			cantOfUpper = 1;
-			break;
-		case '01001111':
-			digitToReturn = "O";
-			cantOfUpper = 1;
-			break;
-		case '01010000':
-			digitToReturn = "P";
-			cantOfUpper = 1;
-			break;
-		case '01010001':
-			digitToReturn = "Q";
-			cantOfUpper = 1;
-			break;
-		case '01010010':
-			digitToReturn = "R";
-			cantOfUpper = 1;
-			break;
-		case '01010011':
-			digitToReturn = "S";
-			cantOfUpper = 1;
-			break;
-		case '01010100':
-			digitToReturn = "T";
-			cantOfUpper = 1;
-			break;
-		case '01010101':
-			digitToReturn = "U";
-			cantOfUpper = 1;
-			break;
-		case '01010110':
-			digitToReturn = "V";
-			cantOfUpper = 1;
-			break;
-		case '01010111':
-			digitToReturn = "W";
-			cantOfUpper = 1;
-			break;
-		case '01011000':
-			digitToReturn = "X";
-			cantOfUpper = 1;
-			break;
-		case '01011001':
-			digitToReturn = "Y";
-			cantOfUpper = 1;
-			break;
-		case '01011010':
-			digitToReturn = "Z";
-			cantOfUpper = 1;
-			break;
-		case '01011011':
-			digitToReturn = "[";
-			cantOfSymbol = 1;
-			break;
-		case '01011101':
-			digitToReturn = "]";
-			cantOfSymbol = 1;
-			break;
-		case '01011111':
-			digitToReturn = "_";
-			cantOfSymbol = 1;
-			break;
-		case '01111110':
-			digitToReturn = "~";
-			cantOfSymbol = 1;
-			break;
-		case '01100001':
-			digitToReturn = "a";
-			cantOfLower = 1;
-			break;
-		case '01100010':
-			digitToReturn = "b";
-			cantOfLower = 1;
-			break;
-		case '01100011':
-			digitToReturn = "c";
-			cantOfLower = 1;
-			break;
-		case '01100100':
-			digitToReturn = "d";
-			cantOfLower = 1;
-			break;
-		case '01100101':
-			digitToReturn = "e";
-			cantOfLower = 1;
-			break;
-		case '01100110':
-			digitToReturn = "f";
-			cantOfLower = 1;
-			break;
-		case '01100111':
-			digitToReturn = "g";
-			cantOfLower = 1;
-			break;
-		case '01101000':
-			digitToReturn = "h";
-			cantOfLower = 1;
-			break;
-		case '01101001':
-			digitToReturn = "i";
-			cantOfLower = 1;
-			break;
-		case '01101010':
-			digitToReturn = "j";
-			cantOfLower = 1;
-			break;
-		case '01101011':
-			digitToReturn = "k";
-			cantOfLower = 1;
-			break;
-		case '01101100':
-			digitToReturn = "l";
-			cantOfLower = 1;
-			break;
-		case '01101101':
-			digitToReturn = "m";
-			cantOfLower = 1;
-			break;
-		case '01101110':
-			digitToReturn = "n";
-			cantOfLower = 1;
-			break;
-		case '01101111':
-			digitToReturn = "o";
-			cantOfLower = 1;
-			break;
-		case '01110000':
-			digitToReturn = "p";
-			cantOfLower = 1;
-			break;
-		case '01110001':
-			digitToReturn = "q";
-			cantOfLower = 1;
-			break;
-		case '01110010':
-			digitToReturn = "r";
-			cantOfLower = 1;
-			break;
-		case '01110011':
-			digitToReturn = "s";
-			cantOfLower = 1;
-			break;
-		case '01110100':
-			digitToReturn = "t";
-			cantOfLower = 1;
-			break;
-		case '01110101':
-			digitToReturn = "u";
-			cantOfLower = 1;
-			break;
-		case '01110110':
-			digitToReturn = "v";
-			cantOfLower = 1;
-			break;
-		case '01110111':
-			digitToReturn = "w";
-			cantOfLower = 1;
-			break;
-		case '01111000':
-			digitToReturn = "x";
-			cantOfLower = 1;
-			break;
-		case '01111001':
-			digitToReturn = "y";
-			cantOfLower = 1;
-			break;
-		case '01111010':
-			digitToReturn = "z";
-			cantOfLower = 1;
-			break;
-		default:
-			getValue(newDigits());
-			break;
-	}*/
 	
-	var dictionary;
-	if(check == 1)
+	digitToReturn = dictionary[binaryCode];
+	if(digitToReturn == null)
 	{
-		dictionary = dictionaryFull;
+		getValue(newDigits());
 	}
 	else
 	{
-		dictionary = dictionaryNAL;
-	}
-	
-	digitToReturn = dictionary[binaryCode];
-	if(digitToReturn == '')
-	{
-		getValue(newDigits());
+		if($.inObject(digitToReturn, symbolDictionary) != null)
+		{
+			cantOfSymbol = 1;
+		}
+		if($.inObject(digitToReturn, numberDictionary) != null)
+		{
+			cantOfNumbers = 1;
+		}
+		if($.inObject(digitToReturn, letterUDictionary) != null)
+		{
+			cantOfUpper = 1;
+		}
+		if($.inObject(digitToReturn, letterLDictionary) != null)
+		{
+			cantOfLower = 1;
+		}
 	}
 	
 	return digitToReturn;
 }
+
+$.inObject = function(value, obj) {
+    var foundKey;
+    $.each(obj, function(key, val) {
+        if (value === val) {
+            foundKey = key;
+            return;
+        }
+    });
+    return foundKey;
+};
+
 
 function getPass(longPass)
 {
@@ -553,6 +183,10 @@ function getPass(longPass)
 	cantOfNumbers = 0;
 	cantOfSymbol = 0;
 	cantOfUpper = 0;
+	if(check == 0)
+	{
+		cantOfSymbol = 1;
+	}
 	countOfDigits = 0;
 	digitsToAdd = "";
 	finalPass = "";
@@ -592,6 +226,41 @@ function getPass(longPass)
 	}
 }
 
+function loadDictionaries()
+{
+	var nullDictionary = {};
+	dictionary = nullDictionary;
+
+	if(check == 1)
+	{
+		$.each( symbolDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+		$.each( numberDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+		$.each( letterUDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+		$.each( letterLDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+	}
+	else
+	{
+		cantOfSymbol = 1;
+		$.each( numberDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+		$.each( letterUDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+		$.each( letterLDictionary, function( key, value ) {
+			dictionary[key] = value;
+		});
+	}
+}
+
 $(document).ready(function (){
 	
 	setDictionary();
@@ -599,12 +268,14 @@ $(document).ready(function (){
 	$('#btnGenerate').click(function (){
 		var longValue = $('#longPassValue').val();
 		check = $('#fullOrNumberAndChar:checked').val();
+		
 		if(longValue == 0 || longValue == "" || longValue < 6 || longValue > 60)
 		{
 			$('#longPassValue').focus();
 		}
 		else
 		{
+			loadDictionaries();
 			getPass(longValue);
 		}
 	});
