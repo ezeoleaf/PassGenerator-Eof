@@ -288,11 +288,20 @@ function loadSimbols()
 	excludedSymbols.length = 0;
 	addSimbolsHtml = "";
 	countSimbols = 0;
+	limit = 0;
 	check = $('#fullOrNumberAndChar:checked').val();
 	loadDictionaries();
+	if(check == 1)
+	{
+		limit = 9;
+	}
+	else
+	{
+		limit = 7
+	}
 	$.each( dictionary, function (key,value)
 	{
-		if(countSimbols == 8)
+		if(countSimbols == limit)
 		{
 			countSimbols = 0;
 			addSimbolsHtml += '<br>';
@@ -402,6 +411,7 @@ $(document).ready(function (){
 	<span id="resultContainer">
 	</span>
 	</div>
+	<br>
 	<div id="simbolsDiv">
 	</div>
 </body> 
