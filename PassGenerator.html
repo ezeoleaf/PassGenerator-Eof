@@ -18,6 +18,7 @@ var dictionaryNAL;
 var vDigitsPass = [];
 var check;
 var dictionary = {};
+var excludedSymbols = [];
 
 function newDigits()
 {
@@ -234,36 +235,126 @@ function loadDictionaries()
 	if(check == 1)
 	{
 		$.each( symbolDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 		$.each( numberDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 		$.each( letterUDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 		$.each( letterLDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 	}
 	else
 	{
 		cantOfSymbol = 1;
 		$.each( numberDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 		$.each( letterUDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
 		$.each( letterLDictionary, function( key, value ) {
-			dictionary[key] = value;
+			if($.inArray(key, excludedSymbols) == -1)
+			{
+				dictionary[key] = value;
+			}
 		});
+	}
+}
+
+function loadSimbols()
+{
+	excludedSymbols.length = 0;
+	addSimbolsHtml = "";
+	countSimbols = 0;
+	check = $('#fullOrNumberAndChar:checked').val();
+	loadDictionaries();
+	$.each( dictionary, function (key,value)
+	{
+		if(countSimbols == 8)
+		{
+			countSimbols = 0;
+			addSimbolsHtml += '<br>';
+		}
+		countSimbols++;
+		nameCheck = "checkSimbol"+key;
+		addSimbolsHtml += '<input type="checkbox" id="'+nameCheck+'" name="'+nameCheck+'" onchange="popSimbol('+"'"+nameCheck+"'"+','+"'"+key+"'"+','+"'"+value+"'"+')" checked /> '+value+'&nbsp;&nbsp;&nbsp;&nbsp;';
+	});
+	
+	$('#simbolsDiv').html(addSimbolsHtml);
+}
+
+function popSimbol(nameSimbol,simbolKey, simbolValue)
+{
+	simbolCheck = $('#'+nameSimbol).is(':checked');
+	if(simbolCheck == false)
+	{
+		delete dictionary[simbolKey];
+		excludedSymbols.push(simbolKey);
+	}
+	else
+	{
+		dictionary[simbolKey] = simbolValue;
+		excludedSymbols.splice($.inArray(simbolKey,excludedSymbols), 1);
+	}
+}
+
+function controlCantOfSimbols()
+{
+	loadDictionaries();
+	$.each(dictionary, function(key,value){
+		if($.inObject(value, symbolDictionary) != null)
+		{
+			cantOfSymbol = 1;
+		}
+		if($.inObject(value, numberDictionary) != null)
+		{
+			cantOfNumbers = 1;
+		}
+		if($.inObject(value, letterUDictionary) != null)
+		{
+			cantOfUpper = 1;
+		}
+		if($.inObject(value, letterLDictionary) != null)
+		{
+			cantOfLower = 1;
+		}
+	});
+	if(cantOfLower == 1 && cantOfNumbers == 1 && cantOfSymbol == 1 && cantOfUpper == 1)
+	{
+		return 0;
+	}
+	else
+	{
+		return 1;
 	}
 }
 
 $(document).ready(function (){
 	
 	setDictionary();
+	loadSimbols();
 	
 	$('#btnGenerate').click(function (){
 		var longValue = $('#longPassValue').val();
@@ -275,8 +366,16 @@ $(document).ready(function (){
 		}
 		else
 		{
-			loadDictionaries();
-			getPass(longValue);
+			if(controlCantOfSimbols() == 0)
+			{
+				loadDictionaries();
+				getPass(longValue);
+			}
+			else
+			{
+				$('#simbolsDiv').focus();
+				$('#resultContainer').html('');
+			}
 		}
 	});
 	
@@ -289,8 +388,8 @@ $(document).ready(function (){
 	</br>
 	<div id="dataContainer">
 		<div>
-		<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" checked /> Letras, n&uacute;meros y s&iacute;mbolos &nbsp;
-		<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" /> Letras y n&uacute;meros
+		<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" onchange="loadSimbols()" checked /> Letras, n&uacute;meros y s&iacute;mbolos &nbsp;
+		<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" onchange="loadSimbols()" /> Letras y n&uacute;meros
 		</div>
 		</br>
 		<span>Ingrese la longitud:</span>
@@ -302,6 +401,8 @@ $(document).ready(function (){
 	<span>Resultado:</span>
 	<span id="resultContainer">
 	</span>
+	</div>
+	<div id="simbolsDiv">
 	</div>
 </body> 
 </html>
