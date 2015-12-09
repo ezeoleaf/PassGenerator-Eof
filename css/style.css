@@ -1,0 +1,73 @@
+#headerText
+{
+	font-family: oldlondon;
+	font-size: 40px;
+}
+
+body
+{
+	background-color: #EEE;
+}
+
+.container
+{
+	background-color: white;
+}
+
+@font-face {
+    font-family: cartographer;
+    src: url(../fonts/Cartographer.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: magnacarta;
+    src: url(../fonts/Magna_Carta.ttf);
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: oldlondon;
+    src: url(../fonts/OldLondon.ttf);
+    font-weight: bold;
+}
+
+.noty_message
+{
+	background-color: #FF5B57;
+}
+
+.noty_text
+{
+	color: white;
+}
+
+#map
+{
+	height: 360px;
+}
+
+#pac-input
+{
+	width: 50%;
+}
+
+#contentArea
+{
+	width:100%;
+	list-style-type:none;
+	padding-left:0px;
+	text-align:left;
+}
+
+#scrollArea
+{
+	width: 100%;
+}
+
+#resultCoordinates
+{
+	height: 0px;
+}
+
+.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}

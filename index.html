@@ -1,10 +1,12 @@
 <!DOCTYPE html> 
 <html lang="es"> 
-<head> 
+<head>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
 	<title>Pass Generator</title>
-	<script type='text/javascript' src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script src="jquery.timer.js" type="text/javascript"></script>
-	<!--link href="PassGeneratorStyle.css" rel="stylesheet" type="text/css" /-->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.timer.js"></script>
 </head>
 <script>
 
@@ -13,8 +15,6 @@ cantOfUpper = 0;
 cantOfLower = 0;
 cantOfSymbol = 0;
 maxLong = 0;
-var dictionaryFull;
-var dictionaryNAL;
 var vDigitsPass = [];
 var check;
 var dictionary = {};
@@ -25,14 +25,7 @@ function newDigits()
 	newDigit = "";
 	for(var i = 1; i <= 8; i++)
 	{
-		if(i == 1)
-		{
-			newDigit += "0";
-		}
-		else
-		{
-			newDigit += Math.floor(Math.random() * 2);
-		}
+		newDigit = (i == 1) ? (newDigit + "0") : (newDigit + Math.floor(Math.random() * 2));
 	}
 	return newDigit;
 }
@@ -182,12 +175,8 @@ function getPass(longPass)
 {
 	cantOfLower = 0;
 	cantOfNumbers = 0;
-	cantOfSymbol = 0;
+	cantOfSymbol = (check == 0) ? 1 : 0;
 	cantOfUpper = 0;
-	if(check == 0)
-	{
-		cantOfSymbol = 1;
-	}
 	countOfDigits = 0;
 	digitsToAdd = "";
 	finalPass = "";
@@ -196,25 +185,16 @@ function getPass(longPass)
 	for(var i = 1; i <= cantOfDigitsPass; i++)
 	{
 		countOfDigits++;
-		if(countOfDigits == 1)
-		{
-			digit = 0;
-		}
-		else
-		{
-			digit = Math.floor(Math.random() * 2);
-		}
+		digit = (countOfDigits == 1) ? 0 : (Math.floor(Math.random() * 2));
 		digitsToAdd += digit;
+
 		if(countOfDigits == 8)
 		{
 			vDigitsPass.push(digitsToAdd);
 			countOfDigits = 0;
 			digitsToAdd = "";
+			finalPass += getValue(vDigitsPass[i]);
 		}
-	}
-	for(var i = 0; i < vDigitsPass.length; i++)
-	{
-		finalPass += getValue(vDigitsPass[i]);
 	}
 	
 	if(cantOfLower == 1 && cantOfNumbers == 1 && cantOfSymbol == 1 && cantOfUpper == 1)
@@ -229,8 +209,7 @@ function getPass(longPass)
 
 function loadDictionaries()
 {
-	var nullDictionary = {};
-	dictionary = nullDictionary;
+	dictionary = {};
 
 	if(check == 1)
 	{
@@ -240,77 +219,59 @@ function loadDictionaries()
 				dictionary[key] = value;
 			}
 		});
-		$.each( numberDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
-		$.each( letterUDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
-		$.each( letterLDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
 	}
 	else
 	{
 		cantOfSymbol = 1;
-		$.each( numberDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
-		$.each( letterUDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
-		$.each( letterLDictionary, function( key, value ) {
-			if($.inArray(key, excludedSymbols) == -1)
-			{
-				dictionary[key] = value;
-			}
-		});
 	}
+
+	$.each( numberDictionary, function( key, value ) {
+		if($.inArray(key, excludedSymbols) == -1)
+		{
+			dictionary[key] = value;
+		}
+	});
+	$.each( letterUDictionary, function( key, value ) {
+		if($.inArray(key, excludedSymbols) == -1)
+		{
+			dictionary[key] = value;
+		}
+	});
+	$.each( letterLDictionary, function( key, value ) {
+		if($.inArray(key, excludedSymbols) == -1)
+		{
+			dictionary[key] = value;
+		}
+	});
 }
 
 function loadSimbols()
 {
 	excludedSymbols.length = 0;
-	addSimbolsHtml = "";
+	addSimbolsHtml = '<div class="row col-xs-12 col-md-8 col-md-offset-2" align="center">';
+	addSimbolsHtml += '<table class="table"><tr>';
 	countSimbols = 0;
 	limit = 0;
 	check = $('#fullOrNumberAndChar:checked').val();
 	loadDictionaries();
-	if(check == 1)
-	{
-		limit = 9;
-	}
-	else
-	{
-		limit = 7
-	}
+	limit = (check == 1) ?10 : 8;
+	
 	$.each( dictionary, function (key,value)
 	{
 		if(countSimbols == limit)
 		{
 			countSimbols = 0;
-			addSimbolsHtml += '<br>';
+			addSimbolsHtml += '</tr>';
+			addSimbolsHtml += '<tr>';
 		}
+
 		countSimbols++;
 		nameCheck = "checkSimbol"+key;
-		addSimbolsHtml += '<input type="checkbox" id="'+nameCheck+'" name="'+nameCheck+'" onchange="popSimbol('+"'"+nameCheck+"'"+','+"'"+key+"'"+','+"'"+value+"'"+')" checked /> '+value+'&nbsp;&nbsp;&nbsp;&nbsp;';
+		addSimbolsHtml += '<td><label class="checkbox-inline"><input type="checkbox"  id="'+nameCheck+'" name="'+nameCheck+'" onchange="popSimbol('+"'"+nameCheck+"'"+','+"'"+key+"'"+','+"'"+value+"'"+')" checked > '+value+'</label></td>';
 	});
-	
+	addSimbolsHtml += '</tr>';
+	addSimbolsHtml += '</table>';
+	addSimbolsHtml += '</div>';
 	$('#simbolsDiv').html(addSimbolsHtml);
 }
 
@@ -391,28 +352,44 @@ $(document).ready(function (){
 });
 </script>
 <body>
-	<div id="title">
-	<span><b>Generador de contrase&ntilde;as - Longitud entre 6 y 60</b></span>
+
+<div class="container">
+	<div class="row text-center">
+		<h1 id="headerText">Password Generator</h1>
 	</div>
-	</br>
-	<div id="dataContainer">
-		<div>
-		<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" onchange="loadSimbols()" checked /> Letras, n&uacute;meros y s&iacute;mbolos &nbsp;
-		<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" onchange="loadSimbols()" /> Letras y n&uacute;meros
-		</div>
-		</br>
-		<span>Ingrese la longitud:</span>
-		<input type="number" id="longPassValue" name="longPass" size="4" value="6" min="6" max="60" style="text-align: right;"/>
-		<input type="button" id="btnGenerate" name="btnGenerate" value="Generar" />
+	<div class="row" align="center">
+		<label class="radio-inline">
+			<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" onchange="loadSimbols()" checked /> Characters, numbers and symbols
+		</label>
+		<label class="radio-inline">
+			<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" onchange="loadSimbols()" /> Characters and numbers
+		</label>
 	</div>
-	</br>
-	<div id="result">
-	<span>Resultado:</span>
-	<span id="resultContainer">
-	</span>
+	<br/>
+	<div class="row" align="center">
+		<form class="form-inline">
+			<div class="form-group">
+				<label>Length: </label>
+				<label class="sr-only" for="longPassValue">Length</label>
+				<div class="input-group">
+					<input type="number" class="form-control" id="longPassValue" value="6" min="6" max="60" placeholder="Length">
+				</div>
+			</div>
+		</form>
 	</div>
-	<br>
+	<br/>
 	<div id="simbolsDiv">
 	</div>
+	<br/>
+	<div class="row col-xs-12" align="center">
+		<button type="button" id="btnGenerate" class="btn btn-primary">Generate!</button><br/><br/>
+	</div>
+	
+	<div class="row col-xs-12">
+		<div class="well col-xs-12 col-md-6 col-md-offset-3" align="center" id="resultWell">
+			<label id="resultContainer"></label>
+		</div>
+	</div>
+</div>
 </body> 
 </html>
