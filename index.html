@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Pass Generator</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
@@ -254,10 +255,19 @@ function loadSimbols()
 	limit = 0;
 	check = $('#fullOrNumberAndChar:checked').val();
 	loadDictionaries();
-	limit = (check == 1) ?10 : 8;
+	//limit = (check == 1) ?10 : 8;
+	limit = 6;
 	
 	$.each( dictionary, function (key,value)
 	{
+		/*
+		var val = getNumberValue(value);
+		switch(val)
+		{
+			case 1:
+
+		}*/
+
 		if(countSimbols == limit)
 		{
 			countSimbols = 0;
@@ -273,6 +283,26 @@ function loadSimbols()
 	addSimbolsHtml += '</table>';
 	addSimbolsHtml += '</div>';
 	$('#simbolsDiv').html(addSimbolsHtml);
+}
+
+function getNumberValue(val)
+{
+	if($.inObject(val, symbolDictionary) != null)
+		{
+			return 1; //Symbol
+		}
+		if($.inObject(val, numberDictionary) != null)
+		{
+			return 2; //Number
+		}
+		if($.inObject(val, letterUDictionary) != null)
+		{
+			return 3; //Character
+		}
+		if($.inObject(val, letterLDictionary) != null)
+		{
+			return 3; //Character
+		}
 }
 
 function popSimbol(nameSimbol,simbolKey, simbolValue)
@@ -351,7 +381,7 @@ $(document).ready(function (){
 	
 });
 </script>
-<body>
+<body class='bg-primary'>
 
 <div class="container">
 	<div class="row text-center">
@@ -380,6 +410,50 @@ $(document).ready(function (){
 	<br/>
 	<div id="simbolsDiv">
 	</div>
+
+	<!--div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+		<div class="panel panel-default" id="panelSymbols">
+		<div class="panel-heading" role="tab" id="headingOne">
+		  <h4 class="panel-title text-center">
+		    <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+		      Symsbols
+		    </a>
+		  </h4>
+		</div>
+		<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+		  <div class="panel-body">
+		  </div>
+		</div>
+		</div>
+		<div class="panel panel-default" id="panelNumbers">
+		<div class="panel-heading" role="tab" id="headingTwo">
+		  <h4 class="panel-title">
+		    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+		      Numbers
+		    </a>
+		  </h4>
+		</div>
+		<div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+		  <div class="panel-body">
+		    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+		  </div>
+		</div>
+		</div>
+		<div class="panel panel-default" id="panelCharacters">
+		<div class="panel-heading" role="tab" id="headingThree">
+		  <h4 class="panel-title">
+		    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+				Characters
+		    </a>
+		  </h4>
+		</div>
+		<div id="collapseThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+		  <div class="panel-body">
+		    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. 3 wolf moon officia aute, non cupidatat skateboard dolor brunch. Food truck quinoa nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt aliqua put a bird on it squid single-origin coffee nulla assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident. Ad vegan excepteur butcher vice lomo. Leggings occaecat craft beer farm-to-table, raw denim aesthetic synth nesciunt you probably haven't heard of them accusamus labore sustainable VHS.
+		  </div>
+		</div>
+		</div>
+	</div-->
 	<br/>
 	<div class="row col-xs-12" align="center">
 		<button type="button" id="btnGenerate" class="btn btn-primary">Generate!</button><br/><br/>
