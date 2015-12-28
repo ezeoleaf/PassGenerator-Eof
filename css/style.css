@@ -20,9 +20,19 @@
 }
 
 @font-face {
-    font-family: pass;
-    src: url(../fonts/VCR_OSD_MONO_1.001.ttf);
-    font-weight: bold;
+	font-family: pass;
+	src: url(../fonts/VCR_OSD_MONO_1.001.ttf);
+	font-weight: bold;
+}
+
+@font-face {
+    font-family: roboto;
+    src: url(../fonts/Roboto-Regular.ttf);
+}
+
+*
+{
+	font-family: roboto;
 }
 
 .noty_message
@@ -33,4 +43,19 @@
 .noty_text
 {
 	color: white;
+}
+
+.checkbox-inline
+{
+	color:black;
+}
+
+a
+{
+	text-decoration: none;
+}
+
+a:hover
+{
+	text-decoration: none;
 }
