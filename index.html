@@ -3,11 +3,14 @@
 <head>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css">
+	<link rel="stylesheet" type="text/css" href="css/animate.min.css">
 	<link rel="stylesheet" type="text/css" href="css/style.css">
 	<title>Pass Generator</title>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
 	<script src="js/jquery.timer.js"></script>
+	<script src="js/noty/packaged/jquery.noty.packaged.min.js"></script>
+	<script src="js/noty/themes/bootstrap.js"></script>
 </head>
 <script>
 
@@ -375,6 +378,19 @@ $(document).ready(function (){
 			{
 				$('#simbolsDiv').focus();
 				$('#resultContainer').html('');
+				var n = noty({
+					text: 'Check at least one number and one character!',
+					type: 'danger',
+					theme: 'defaultTheme', // or 'relax'
+					template: '<div class="noty_message bg-danger"><span class="glyphicon glyphicon-warning-sign" style="color: white" aria-hidden="true"></span><b><span class="noty_text"></span><div class="noty_close"></b></div></div>',
+					animation: {
+						open: 'animated pulse', // Animate.css class names
+						close: 'animated bounceOutLeft', // Animate.css class names
+						easing: 'swing', // easing
+						speed: 500 // opening & closing animation speed
+					},
+					timeout: 3000,
+				});
 			}
 		}
 	});
@@ -389,10 +405,10 @@ $(document).ready(function (){
 	</div>
 	<div class="row" align="center">
 		<label class="radio-inline">
-			<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" onchange="loadSimbols()" checked /> Characters, numbers and symbols
+			<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" onchange="loadSimbols()" checked /> Characters and numbers
 		</label>
 		<label class="radio-inline">
-			<input type="radio" id="fullOrNumberAndChar" value="0" name="parcialOrFull" onchange="loadSimbols()" /> Characters and numbers
+			<input type="radio" id="fullOrNumberAndChar" value="1" name="parcialOrFull" onchange="loadSimbols()" /> Characters, numbers and symbols
 		</label>
 	</div>
 	<br/>
